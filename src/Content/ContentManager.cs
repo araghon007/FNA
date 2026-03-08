@@ -43,9 +43,9 @@ namespace Microsoft.Xna.Framework.Content
 
 		#endregion
 
-		#region Internal Root Directory Path Property
+		#region Public Root Directory Path Property
 
-		internal string RootDirectoryFullPath
+		public string RootDirectoryFullPath
 		{
 			get
 			{
@@ -236,6 +236,22 @@ namespace Microsoft.Xna.Framework.Content
 			}
 			disposableAssets.Clear();
 			loadedAssets.Clear();
+		}
+
+		public GraphicsDevice GetGraphicsDevice()
+		{
+			if (graphicsDevice == null)
+			{
+				IGraphicsDeviceService result = ServiceProvider.GetService(
+					typeof(IGraphicsDeviceService)
+				) as IGraphicsDeviceService;
+				if (result == null)
+				{
+					throw new ContentLoadException("No Graphics Device Service");
+				}
+				graphicsDevice = result.GraphicsDevice;
+			}
+			return graphicsDevice;
 		}
 
 		#endregion
@@ -438,23 +454,6 @@ namespace Microsoft.Xna.Framework.Content
 				disposableAssets.Add(disposable);
 			}
 		}
-
-		internal GraphicsDevice GetGraphicsDevice()
-		{
-			if (graphicsDevice == null)
-			{
-				IGraphicsDeviceService result = ServiceProvider.GetService(
-					typeof(IGraphicsDeviceService)
-				) as IGraphicsDeviceService;
-				if (result == null)
-				{
-					throw new ContentLoadException("No Graphics Device Service");
-				}
-				graphicsDevice = result.GraphicsDevice;
-			}
-			return graphicsDevice;
-		}
-
 		#endregion
 
 		#region Private Methods

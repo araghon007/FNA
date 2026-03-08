@@ -7,7 +7,7 @@ using System.IO;
 
 namespace MonoGame.Utilities
 {
-    internal static class FileHelpers
+    public static class FileHelpers
     {
         public static readonly char ForwardSlash = '/';
         public static readonly string ForwardSlashString = new string(ForwardSlash, 1);
