@@ -359,6 +359,44 @@ namespace Microsoft.Xna.Framework.Graphics
 			);
 		}
 
+
+		public void Draw(
+			Texture2D texture,
+			Vector2 position,
+			float x,
+			float y,
+			float width,
+			float height,
+			float destW,
+			float destH
+		)
+		{
+			var sourceX = x / texture.Width;
+			var sourceY = y / texture.Height;
+			var sourceW = width / texture.Width;
+			var sourceH = height / texture.Height;
+
+			CheckBegin("Draw");
+			PushSprite(
+				texture,
+				sourceX,
+				sourceY,
+				sourceW,
+				sourceH,
+				position.X,
+				position.Y,
+				destW,
+				destH,
+				Color.White,
+				0.0f,
+				0.0f,
+				0.0f,
+				1.0f,
+				0.0f,
+				0
+			);
+		}
+
 		public void Draw(
 			Texture2D texture,
 			Vector2 position,
